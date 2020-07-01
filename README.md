@@ -26,7 +26,7 @@ There are two flavours of the images available:
 
 Each tag is built for multiple architectures (`linux-{amd64,386,arm64,arm/v7}`).
 
-The default tag `:latest` is pointing to the latest `scratch` image.
+The default tag `:latest` is pointing to the latest `debian` image.
 
 ## Examples
 
