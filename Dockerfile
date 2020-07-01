@@ -3,7 +3,7 @@ ARG FLAVOUR=scratch
 ## =================================
 # Collect list of (non-directory)
 # contents of a blank Debian image:
-FROM --platform=${TARGETPLATFORM} debian:10-slim AS blank-debian
+FROM debian:10-slim AS blank-debian
 RUN find / -not -type d > /filelist
 ## =================================
 
@@ -12,7 +12,7 @@ RUN find / -not -type d > /filelist
 # Select the binaries and the libraries they depend on using the dockerize tool
 # which uses objdump and consecutively ld-linux to figure out the depencencies
 # in a recursive fashion to put only what's immediately needed into the final images.
-FROM --platform=${TARGETPLATFORM} pklaus/epics_base:7.0.4_debian AS builder
+FROM pklaus/epics_base:7.0.4_debian AS builder
 # default user in the above image is "scs", so go back to root:
 ARG FLAVOUR
 ENV FLAVOUR=${FLAVOUR}
@@ -56,7 +56,7 @@ RUN if [ "${FLAVOUR}" == "debian" ]; then \
 # Multi-Arch Preparations (various FROM to set ENV EPICS_HOST_ARCH differently)
 #
 # Scratch (empty base image)
-FROM --platform=${TARGETPLATFORM} scratch as base-scratch
+FROM scratch as base-scratch
 FROM base-scratch AS base-scratch-amd64
 ENV EPICS_HOST_ARCH=linux-x86_64
 FROM base-scratch AS base-scratch-386
@@ -67,7 +67,7 @@ FROM base-scratch AS base-scratch-arm
 ENV EPICS_HOST_ARCH=linux-arm
 #
 # Debian
-FROM --platform=${TARGETPLATFORM} debian:10-slim AS base-debian
+FROM debian:10-slim AS base-debian
 FROM base-debian AS base-debian-amd64
 ENV EPICS_HOST_ARCH=linux-x86_64
 FROM base-debian AS base-debian-386
