@@ -17,14 +17,16 @@ caConnTest  cainfo       excas    pvcall        softIoc
 caDirServ   camonitor    genApps  pvget         softIocPVA
 ```
 
-## Tags
+## Tag Flavours
 
 There are two flavours of the images available:
 
-* `scratch` (aka `latest`) **no** underlying Linux system, just executables and libraries,
+* `scratch` **no** underlying Linux system, just executables and libraries,
 * `debian` based on Debian (slighly larger)
 
 Each tag is built for multiple architectures (`linux-{amd64,386,arm64,arm/v7}`).
+
+The default tag `:latest` is pointing to the latest `scratch` image.
 
 ## Examples
 
