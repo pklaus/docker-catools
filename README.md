@@ -40,9 +40,10 @@ docker run \
   caget FAIR:CBM:MVD:YOUR:PV
 ```
 
-**camonitor** works too, but for being able to quit <kbd>Ctrl + c</kbd> the process needs to run
-with a PID higher than 1 inside the container. This can be reached by wrapping the
-call in a shell command or by specifying `--pid=host` in the docker run statement:
+**camonitor** works too, but for being able to quit the process using <kbd>Ctrl-c</kbd>
+it needs to be run with a PID higher than 1. This can be reached by wrapping the
+call in a shell command or by specifying the host namespace for the PID in the
+docker run statement:
 
 ```
 docker run \
@@ -54,8 +55,8 @@ docker run \
 ```
 
 *If such a command was accidentally started without specifying a different PID it won't quit
-with <kbd>Ctrl + c</kbd>, the terminal can be disattached from the container using
-<kbd>Ctrl + p</kbd> <kbd>Ctrl + q</kbd> and the container can then be killed with
+with <kbd>Ctrl-c</kbd>, the terminal can be disattached from the container using
+<kbd>Ctrl-p</kbd> <kbd>Ctrl-q</kbd> and the container can then be killed with
 `docker kill` using the hash revealed by `docker ps`.*
 
 When using a more elaborate tool such as the `softIoc`, I recommend to use the
