@@ -1,4 +1,4 @@
-ARG FLAVOUR=scratch
+ARG FLAVOUR=debian
 
 ## =================================
 # Collect list of (non-directory)
@@ -56,14 +56,14 @@ RUN if [ "${FLAVOUR}" == "debian" ]; then \
 # Multi-Arch Preparations (various FROM to set ENV EPICS_HOST_ARCH differently)
 #
 # Scratch (empty base image)
-FROM scratch as base-scratch
-FROM base-scratch AS base-scratch-amd64
+FROM scratch as base-slim
+FROM base-slim AS base-slim-amd64
 ENV EPICS_HOST_ARCH=linux-x86_64
-FROM base-scratch AS base-scratch-386
+FROM base-slim AS base-slim-386
 ENV EPICS_HOST_ARCH=linux-x86
-FROM base-scratch AS base-scratch-arm64
+FROM base-slim AS base-slim-arm64
 ENV EPICS_HOST_ARCH=linux-arm
-FROM base-scratch AS base-scratch-arm
+FROM base-slim AS base-slim-arm
 ENV EPICS_HOST_ARCH=linux-arm
 #
 # Debian
@@ -79,7 +79,7 @@ ENV EPICS_HOST_ARCH=linux-arm
 ## ============================================================================
 
 ## ====================================================
-# Final Build Stage - From {scratch,alpine,debian}-base
+# Final Build Stage
 FROM base-${FLAVOUR}-${TARGETARCH} as final
 COPY --from=builder /catools_root /
 ENV PATH /epics/base/bin/${EPICS_HOST_ARCH}:$PATH

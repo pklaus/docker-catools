@@ -21,8 +21,8 @@ caDirServ   camonitor    genApps  pvget         softIocPVA
 
 There are two flavours of the images available:
 
-* `scratch` **no** underlying Linux system, just executables and libraries,
-* `debian` based on Debian (slighly larger)
+* `slim` **no** underlying Linux system, just executables and libraries,
+* `debian` based on Debian (slighly larger).
 
 Each tag is built for multiple architectures (`linux-{amd64,386,arm64,arm/v7}`).
 
